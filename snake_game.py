@@ -144,16 +144,17 @@ class SnakeGameAi:
         # [straight, right, left]
 
         clock_wise = [Direction.RIGHT, Direction.DOWN, Direction.LEFT,Direction.UP]
-        idk = clock_wise.index(self.direction)
+        idx = clock_wise.index(self.direction)
 
         if np.array_equal(action,[1,0,0]):
-            new_dir = clock_wise[idk] # no change
+            new_dir = clock_wise[idx] # no change
         elif np.array_equal(action,[0,1,0]):
-            next_idk = (idk + 1) % 4
-            new_dir = clock_wise[idk] # right turn
-        else np.array_equal(action,[0,0,1]):
-            next_idk = (idk - 1) %4
-            new_dir = clock_wise[idk]
+            next_idx = (idx + 1) % 4
+            new_dir = clock_wise[idx] # right turn
+        else:
+             
+            next_idx = (idx - 1) % 4
+            new_dir = clock_wise[next_idx]
 
         self.direction = new_dir
 
