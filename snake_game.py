@@ -146,34 +146,44 @@ class SnakeGameAi:
         clock_wise = [Direction.RIGHT, Direction.DOWN, Direction.LEFT,Direction.UP]
         idk = clock_wise.index(self.direction)
 
+        if np.array_equal(action,[1,0,0]):
+            new_dir = clock_wise[idk] # no change
+        elif np.array_equal(action,[0,1,0]):
+            next_idk = (idk + 1) % 4
+            new_dir = clock_wise[idk] # right turn
+        else np.array_equal(action,[0,0,1]):
+            next_idk = (idk - 1) %4
+            new_dir = clock_wise[idk]
+
+        self.direction = new_dir
 
 
         x = self.head.x    
         y = self.head.y
 
-        if direction == Direction.RIGHT:
+        if self.direction == Direction.RIGHT:
             x += BLOCK_SIZE    
-        elif direction == Direction.LEFT:
+        elif self.direction == Direction.LEFT:
             x -= BLOCK_SIZE    
-        elif direction == Direction.UP:
+        elif self.direction == Direction.UP:
             y -= BLOCK_SIZE    
-        elif direction == Direction.DOWN:
+        elif self.direction == Direction.DOWN:
             y += BLOCK_SIZE  
 
         self.head = Point(x,y) 
 
-if __name__ == '__main__':
-    game= SnakeGameAi()
+# if __name__ == '__main__':
+#     game= SnakeGameAi()
 
-    # game loop
+#     # game loop
 
-    while True:
-        game_over, score = game.play_step()
+#     while True:
+#         game_over, score = game.play_step()
 
-        # Break game when game over
-        if game_over == True:
-            break
+#         # Break game when game over
+#         if game_over == True:
+#             break
 
-    print('Final score: ', score)
+#     print('Final score: ', score)
 
-    pygame.quit()
+#     pygame.quit()
